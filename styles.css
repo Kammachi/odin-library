@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --table-border-radius: 10px;
+}
+
+html, body {
+    font-family: system-ui, "Segoe UI", 
+        Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", 
+        "Segoe UI Emoji", "Segoe UI Symbol";
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url(img/books.jpg) no-repeat fixed;
+    background-size: cover;
+}
+
+main {
+    height: 100vh;
+    background-color: rgb(0 0 0 / 0.65);
+    position: relative;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 850px;
+    margin: 0 auto;
+    box-shadow: 4px 4px 16px rgb(0 0 0);
+}
+
+caption {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 32px 0;
+    padding: 16px 0;
+    color: white;
+    background-color: #47261c;
+    border-radius: 16px;
+    box-shadow: 4px 4px 4px rgb(0 0 0);
+}
+
+thead tr th:first-child {
+    border-top-left-radius: var(--table-border-radius);
+}
+
+thead tr th:last-child {
+    border-top-right-radius: var(--table-border-radius);
+}
+
+tbody tr:last-child th {
+    border-bottom-left-radius: var(--table-border-radius);
+}
+
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius: var(--table-border-radius);
+}
+
+thead th { 
+    padding: 10px 12px;
+    background-color: #47261c;
+    color: white;
+}
+
+tbody th {
+    padding: 6px 10px;
+    font-weight: 500;
+    background-color: #663526; 
+    color: white;
+    max-width: 100px;
+}
+
+tbody tr:nth-child(2n) th {
+    background-color: #744334
+}
+
+tbody tr:nth-child(2n) td {
+    background-color: #DDD;
+}
+
+tbody tr:nth-child(2n + 1) td {
+    background-color: #CCC;
+}
+
+td {
+    padding: 8px 0;
+    text-align: center;
+}
+
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.img-author {
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.75;
+}
