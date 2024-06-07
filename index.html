@@ -21,13 +21,61 @@
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
                         <th scope="col">Pages</th>
-                        <th scope="col">Year</th>
                         <th scope="col">Read</th>
+                        <th scope="col">Rating</th>
                     </tr>
                 </thead>
 
                 <tbody></tbody>
             </table>
+
+            <div class="newBook">
+                <button class="newBookButton">Add a Book</button>
+            </div>
+
+            <dialog id="dialog">
+                <form method="dialog">
+                    <div class="form-container">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="book-title" required>
+                    </div>
+
+                    <div class="form-container">
+                        <label for="author">Author:</label>
+                        <input type="text" id="author" name="book-author" required>
+                    </div>
+                    
+                    <div class="form-container">
+                        <label for="pages">Pages:</label>
+                        <input type="number" id="pages" name="pages" min="0" required>
+                    </div>
+
+                    <fieldset class="form-radio">
+                        <legend>Have you read it?</legend>
+
+                        <div>
+                            <label for="read">Yes</label>
+                            <input type="radio" id="read" name="read" value="true" required>
+                        </div>
+
+                        <div>
+                            <label for="notRead">No</label>
+                            <input type="radio" id="notRead" name="read" value="false" required>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-container">
+                        <label for="rating">Your Rating:</label>
+                        <input type="number" id="rating" name="user-rating" 
+                                min="1" max="10">
+                    </div>
+
+                    <div class="buttons-container">
+                        <button type="submit">Add</button>
+                        <button type="button" id="cancel">Cancel</button>
+                    </div>
+                </form>
+            </dialog>
 
             <div class="img-author">Image by <a href="https://www.pexels.com/@minan1398/">Min An</a></div>
         </main>
