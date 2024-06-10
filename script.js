@@ -21,15 +21,23 @@ addBooktoLibrary("The Brothers Karamazov", "Fyodor Dostoevsky",
                 960, true, 9);
 
 
+
 const tableBody = document.querySelector('tbody')
 
-
 function displayLibrary() {
+    let count = 0;
 
     for (let book of myLibrary) {
-        let row = document.createElement('tr');
+        const row = document.createElement('tr');
+        const deleteButton = document.createElement('button');
+        
+        deleteButton.textContent = "DEL";
 
-        for (let key of Object.keys(book)) {
+        deleteButton.setAttribute('class', 'deleteButton')
+        deleteButton.setAttribute("data-id", count);
+        count++;
+
+        for (const key of Object.keys(book)) {
             let bookInfo;
 
             if (key == "title")  {
@@ -45,8 +53,27 @@ function displayLibrary() {
             row.appendChild(bookInfo);
         }
 
+        row.appendChild(deleteButton);
+
         tableBody.appendChild(row);
     }
+
+    let deleteButtons = document.querySelectorAll('.deleteButton');
+
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            let id = parseInt(button.getAttribute('data-id'));
+
+            myLibrary.splice(id, 1);
+
+            let deletedRow = tableBody.querySelector(`tr:nth-child(${id+1})`);
+            tableBody.removeChild(deletedRow);
+            
+
+            discardTable();
+            displayLibrary();
+        });
+    });
 }
 
 
@@ -92,4 +119,7 @@ cancel.addEventListener('click', () => {
 });
 
 
+
 displayLibrary();
+
+

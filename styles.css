@@ -13,7 +13,7 @@ html, body {
     font-family: system-ui, "Segoe UI", 
         Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", 
         "Segoe UI Emoji", "Segoe UI Symbol";
-
+        
     margin: 0;
     padding: 0;
 }
@@ -29,19 +29,19 @@ button:hover {
 }
 
 main {
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgb(0 0 0 / 0.65);
     position: relative;
+    overflow: scroll;
 }
 
 /* Books */
 
 table {
     border-collapse: collapse;
-    min-width: 850px;
+    min-width: 950px;
     margin: 0 auto;
     box-shadow: 4px 4px 16px rgb(0 0 0);
-    overflow: scroll;
 }
 
 caption {
@@ -51,6 +51,7 @@ caption {
     padding: 16px 0;
     color: white;
     background-color: #47261c;
+    border: solid 2px white;
     border-radius: 16px;
     box-shadow: 4px 4px 4px rgb(0 0 0);
 }
@@ -67,7 +68,7 @@ tbody tr:last-child th {
     border-bottom-left-radius: var(--table-border-radius);
 }
 
-tbody tr:last-child td:last-child {
+tbody tr:last-child td:nth-last-child(2) {
     border-bottom-right-radius: var(--table-border-radius);
 }
 
@@ -97,19 +98,29 @@ tbody tr:nth-child(2n + 1) td {
     background-color: #CCC;
 }
 
+tr {
+    position: relative;
+}
+
 td {
     padding: 8px 0;
     text-align: center;
 }
 
+tbody button {
+    position: absolute;
+    right: -48px;
+    top: 7px;
+}
 
+
+.add-container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
 
 /* Button */
-
-.newBook {
-    margin-top: 16px;
-    
-}
 
 .newBookButton {
     font-size: 1.05rem;
