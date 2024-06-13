@@ -1,3 +1,5 @@
+const tableBody = document.querySelector('tbody')
+
 const myLibrary = [];
 
 function Book(title, author, pages, read, rating) {
@@ -14,33 +16,49 @@ function addBooktoLibrary(title, author, pages, read, rating) {
 }
 
 
-addBooktoLibrary("Title1", "Author1", 0, true, 8);
-addBooktoLibrary("Title2", "Author2", 122, false, "-");
-addBooktoLibrary("Title3", "Author3", 900, true, 3);
+addBooktoLibrary("Title1", "Author1", 0, "Yes", 8);
+addBooktoLibrary("Title2", "Author2", 122, "No", "-");
+addBooktoLibrary("Title3", "Author3", 900, "Yes", 3);
 addBooktoLibrary("The Brothers Karamazov", "Fyodor Dostoevsky", 
-                960, true, 9);
+                960, "Yes", 9);
 
-
-
-const tableBody = document.querySelector('tbody')
 
 function displayLibrary() {
+    /* setting a counter to associate buttons with books */
     let count = 0;
 
+    /* generating rows for the table */
     for (let book of myLibrary) {
         const row = document.createElement('tr');
         const deleteButton = document.createElement('button');
-        
-        deleteButton.textContent = "DEL";
+        const toggleButton = document.createElement('button');
 
-        deleteButton.setAttribute('class', 'deleteButton')
+        /* creating an svg element and adding it to the button */
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg"  width="24" 
+                    height="24"  viewBox="0 0 24 24"  fill="#663526"  
+                    stroke="#EEE"  stroke-width="2"  
+                    stroke-linecap="round"  stroke-linejoin="round"  
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-square-x" 
+                    fill="white"><path stroke="none" d="M0 0h24v24H0z" 
+                    fill="none"/><path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
+                    <path d="M9 9l6 6m0 -6l-6 6" /></svg>`;
+
+        deleteButton.innerHTML = svg;
+
+
+        deleteButton.classList.add('deleteButton')
         deleteButton.setAttribute("data-id", count);
+        
+        toggleButton.textContent = "Toggle";
+        toggleButton.classList.add('toggleButton')
+        toggleButton.setAttribute("data-id", count);
         count++;
 
+        /* generating a row */
         for (const key of Object.keys(book)) {
             let bookInfo;
 
-            if (key == "title")  {
+            if (key === "title")  {
                 bookInfo = document.createElement('th');
                 bookInfo.setAttribute('scope', 'row')
             } else {
@@ -49,6 +67,10 @@ function displayLibrary() {
 
             bookInfo.textContent = book[key];
 
+            /* adding a toggle button between data */
+            if (key === "read") {
+                bookInfo.appendChild(toggleButton);
+            }
 
             row.appendChild(bookInfo);
         }
@@ -58,6 +80,7 @@ function displayLibrary() {
         tableBody.appendChild(row);
     }
 
+    /* delete buttons listeners */
     let deleteButtons = document.querySelectorAll('.deleteButton');
 
     deleteButtons.forEach((button) => {
@@ -74,17 +97,21 @@ function displayLibrary() {
             displayLibrary();
         });
     });
+
+    /* toggle buttons listeners */
+    let toggleButtons = document.querySelectorAll('.toggleButton');
+
+    toggleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            let id = parseInt(button.getAttribute('data-id'));
+
+            myLibrary[id].read = myLibrary[id].read === "Yes" ? "No" : "Yes";
+
+            discardTable()
+            displayLibrary();
+        });
+    });
 }
-
-
-const newBook = document.querySelector('.newBookButton');
-const dialog = document.querySelector('#dialog');
-
-newBook.addEventListener('click', () => {
-    dialog.show();
-});
-
-
 
 function discardTable() {
     for (let book of myLibrary) {
@@ -93,8 +120,16 @@ function discardTable() {
 }
 
 
+const newBook = document.querySelector('.newBookButton');
+const dialog = document.querySelector('#dialog');
 const form = document.querySelector('form');
 const cancel = document.querySelector('#cancel');
+
+/* opens the form */
+newBook.addEventListener('click', () => {
+    dialog.show();
+});
+
 
 form.addEventListener('submit', (event) => {
 
@@ -104,22 +139,22 @@ form.addEventListener('submit', (event) => {
     const newRead = document.querySelector('input[name="read"]:checked');
     const newRating = document.querySelector('#rating');
 
+    addBooktoLibrary(newTitle.value, 
+            !newAuthor.value ? "-" :newAuthor.value,
+            !newPages.value  ? "-" :newPages.value, 
+            newRead.value, 
+            !newRating.value ? "-" :newRating.value)
+
     discardTable();
-
-    addBooktoLibrary(newTitle.value, newAuthor.value, newPages.value, 
-                    newRead.value, newRating.value)
-
     displayLibrary();
 
     event.preventDefault();
 });
 
+/* closes the form */
 cancel.addEventListener('click', () => {
     dialog.close();
 });
 
 
-
 displayLibrary();
-
-
