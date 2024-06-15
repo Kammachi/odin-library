@@ -39,7 +39,7 @@ main {
 
 table {
     border-collapse: collapse;
-    min-width: 900px;
+    min-width: 1200px;
     margin: 0 auto;
     box-shadow: 0px 0px 80px black;
 }
@@ -78,12 +78,18 @@ thead th {
     color: white;
 }
 
+th img {
+    vertical-align: top;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+}
+
 tbody th {
     padding: 6px 10px;
     font-weight: 500;
     background-color: var(--secondary-color); 
     color: white;
-    max-width: 100px;
 }
 
 tbody tr:nth-child(2n) th {
@@ -112,7 +118,7 @@ td {
     padding: 0;
     margin: 0;
     right: -32px;
-    top: 10px;
+    top: 12px;
 
     width: 24px;
     height: 24px;
@@ -132,11 +138,11 @@ td {
     padding: 2px 4px;
 }
 
-tbody button:hover {
+.deleteButton:hover {
     opacity: 0.75;
 }
 
-tbody button:active {
+.deleteButton:active {
     opacity: 0.5;
 }
 

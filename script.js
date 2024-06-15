@@ -1,4 +1,4 @@
-const tableBody = document.querySelector('tbody')
+const tableBody = document.querySelector('tbody');
 
 const myLibrary = [];
 
@@ -16,8 +16,8 @@ function addBooktoLibrary(title, author, pages, read, rating) {
 }
 
 
-addBooktoLibrary("Title1", "Author1", 0, "Yes", 8);
 addBooktoLibrary("Title2", "Author2", 122, "No", "-");
+addBooktoLibrary("Title1", "Author1", 0, "Yes", 8);
 addBooktoLibrary("Title3", "Author3", 900, "Yes", 3);
 addBooktoLibrary("The Brothers Karamazov", "Fyodor Dostoevsky", 
                 960, "Yes", 9);
@@ -113,11 +113,64 @@ function displayLibrary() {
     });
 }
 
+
+displayLibrary();
+
+
 function discardTable() {
     for (let book of myLibrary) {
         tableBody.removeChild(document.querySelector('tbody tr'));
     }
 }
+
+/* sorting */
+
+const headers = document.querySelectorAll('thead th');
+
+headers.forEach((header) => {
+    const thingToSort = header.querySelector('span')
+
+    header.addEventListener('click', (e) => {
+        sortTable(thingToSort.textContent.toLowerCase());
+        e.stopPropagation();
+    });
+});
+
+let criteriaList = {
+    "title": false,
+    "author": false,
+    "pages": false,
+    "read": false,
+    "rating": false,
+}
+
+function sortTable(criteria) {
+
+    myLibrary.sort((book1, book2) => {
+        let criteria1 = book1[criteria] === "-" ? "0" : book1[criteria];
+        let criteria2 = book2[criteria] === "-" ? "0" : book2[criteria];
+
+        let statement = criteriaList[criteria] === true ?
+                 criteria1 > criteria2 : criteria1 < criteria2;
+
+        if (statement) {
+            return -1;
+        } else if (criteria1 === criteria2) {
+            return 0;
+        }
+
+        return 1;
+    });
+
+    criteriaList[criteria] = !criteriaList[criteria];
+
+    discardTable()
+    displayLibrary();
+}
+
+
+
+/* form */
 
 
 const newBook = document.querySelector('.newBookButton');
@@ -139,13 +192,15 @@ form.addEventListener('submit', (event) => {
     const newRead = document.querySelector('input[name="read"]:checked');
     const newRating = document.querySelector('#rating');
 
+    discardTable();
+
     addBooktoLibrary(newTitle.value, 
             !newAuthor.value ? "-" :newAuthor.value,
             !newPages.value  ? "-" :newPages.value, 
             newRead.value, 
             !newRating.value ? "-" :newRating.value)
 
-    discardTable();
+   
     displayLibrary();
 
     event.preventDefault();
@@ -155,6 +210,3 @@ form.addEventListener('submit', (event) => {
 cancel.addEventListener('click', () => {
     dialog.close();
 });
-
-
-displayLibrary();
