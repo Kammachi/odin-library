@@ -40,7 +40,7 @@ main {
 table {
     border-collapse: collapse;
     min-width: 1200px;
-    margin: 0 auto;
+    margin: 16px auto;
     box-shadow: 0px 0px 80px black;
 }
 
@@ -87,13 +87,12 @@ th img {
 
 tbody th {
     padding: 6px 10px;
-    font-weight: 500;
-    background-color: var(--secondary-color); 
-    color: white;
+    font-weight: normal;
+    background-color: #CCC; 
 }
 
 tbody tr:nth-child(2n) th {
-    background-color: var(--bright-secondary);
+    background-color: #DDD;
 }
 
 tbody tr:nth-child(2n) td {
@@ -118,7 +117,7 @@ td {
     padding: 0;
     margin: 0;
     right: -32px;
-    top: 12px;
+    top: 11px;
 
     width: 24px;
     height: 24px;
