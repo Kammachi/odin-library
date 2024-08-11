@@ -64,7 +64,7 @@ thead tr th:last-child {
     border-top-right-radius: var(--table-border-radius);
 }
 
-tbody tr:last-child th {
+tbody tr:last-child :first-child {
     border-bottom-left-radius: var(--table-border-radius);
 }
 
@@ -83,12 +83,6 @@ th img {
     margin: auto;
     width: 20px;
     height: 20px;
-}
-
-tbody th {
-    padding: 6px 10px;
-    font-weight: normal;
-    background-color: #CCC; 
 }
 
 tbody tr:nth-child(2n) th {
